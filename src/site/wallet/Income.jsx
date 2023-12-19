@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { getIncomes } from "../../services/IncomeRoutes";
-import { Table } from "reactstrap";
+import { Button, Table } from "reactstrap";
 import IncomeList from "./IncomeList";
+import { useNavigate } from "react-router-dom";
 
 function Income() {
+  const navigate = useNavigate();
   const { data, isLoading } = useQuery({
     queryKey: ["getIncomes"],
     queryFn: () => getIncomes(),
@@ -15,10 +17,27 @@ function Income() {
     return <div>Loading...</div>;
   }
 
+  const incomeHandler = async () => {
+    navigate("/user/wallet/registerIncome");
+  };
+
   return (
     <div>
-      <h3>Incomes</h3>
-      <Table bordered hover>
+      <div className="row">
+        <div className="col">
+          <h3>Incomes</h3>
+        </div>
+        <div className="col d-flex justify-content-end">
+          <Button
+            className="mt-auto bg-success "
+            style={{ border: "none" }}
+            onClick={incomeHandler}
+          >
+            Add income
+          </Button>
+        </div>
+      </div>
+      <Table bordered hover className="mt-2">
         <thead>
           <tr>
             <th>IncomeId</th>

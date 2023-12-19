@@ -4,8 +4,8 @@ function IncomeList({ income }) {
       <th>{income?.incomeId}</th>
       <th>{income?.categoryName}</th>
       <th>{income?.amount}</th>
-      <th>{income?.note}</th>
       <th>{income?.date}</th>
+      <th>{income?.note}</th>
     </tr>
   );
 }

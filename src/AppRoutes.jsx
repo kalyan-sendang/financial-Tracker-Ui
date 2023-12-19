@@ -9,10 +9,10 @@ import UserDashboard from "./site/wallet/userDashboard";
 import Protected from "./site/utils/Protected";
 import RegisterWallet from "./site/wallet/RegisterWallet";
 import Wallet from "./site/wallet/Wallet";
+import RegisterExpense from "./site/wallet/RegisterExpense";
+import RegisterIncome from "./site/wallet/RegisterIncome";
 
 const AppRoutes = () => {
-  // user
-
   return (
     <BrowserRouter>
       <Routes>
@@ -45,7 +45,11 @@ const AppRoutes = () => {
         >
           <Route index element={<UserDashboard />} />
           <Route path="registerwallet" element={<RegisterWallet />} />
-          <Route path="wallet" element={<Wallet />} />
+          <Route path="wallet">
+            <Route index element={<Wallet />} />
+            <Route path="registerExpense" element={<RegisterExpense />} />
+            <Route path="registerIncome" element={<RegisterIncome />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

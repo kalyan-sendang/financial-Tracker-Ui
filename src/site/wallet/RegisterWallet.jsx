@@ -3,6 +3,7 @@ import { Label } from "reactstrap";
 import axiosInstance from "../../../axiosInstance";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getWallet } from "../../services/Routes";
 
 function RegisterWallet() {
   const navigate = useNavigate();
@@ -34,11 +35,20 @@ function RegisterWallet() {
   }
 
   const formikSubmit = async (value, action) => {
-    const response = await axiosInstance
-      .post("/wallet", value)
-      .then(() => navigate("/user/wallet"))
-      .catch((err) => err);
-    console.log(response);
+    try {
+      const { status } = await axiosInstance.post("/wallet", value);
+      if (status === 200) {
+        const response = await getWallet();
+        console.log(response);
+        localStorage.setItem(
+          "wallet",
+          JSON.stringify(response?.data?.response)
+        );
+        navigate("/user");
+      }
+    } catch (error) {
+      console.error("Login Error ", error);
+    }
   };
   return (
     <div className="name" style={{ paddingRight: "4rem" }}>
@@ -52,24 +62,24 @@ function RegisterWallet() {
                 <Label>Wallet Name</Label>
                 <Field
                   className="form-control"
-                  name="walletName"
+                  name="name"
                   type="text"
                   validate={validateWalletName}
                 />
-                {errors.walletName && touched.walletName && (
-                  <div style={{ color: "red" }}>{errors.walletName}</div>
+                {errors.name && touched.name && (
+                  <div style={{ color: "red" }}>{errors.name}</div>
                 )}
               </div>
               <div className="form-group">
                 <Label>Amount</Label>
                 <Field
                   className="form-control"
-                  name="Amount"
+                  name="amount"
                   type="number"
                   validate={ValidateAmount}
                 />
-                {errors.email && touched.email && (
-                  <div style={{ color: "red" }}>{errors.email}</div>
+                {errors.amount && touched.amount && (
+                  <div style={{ color: "red" }}>{errors.amount}</div>
                 )}
               </div>
               <div style={{ paddingTop: " 10px" }}>

@@ -10,22 +10,21 @@ function Wallet() {
     queryFn: () => getWallet(),
   });
   const wallet = data?.data?.response;
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
   return (
     <div className="container">
       <Row>
-        <div className="col">
+        <div className="col-3">
           <h2>
             <b>My Wallet</b>
           </h2>
           <Card style={{ width: "18rem" }}>
             <Card.Body>
-              <Card.Title>{wallet[0].name}</Card.Title>
+              <Card.Title>{wallet?.name}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
-                Rs.{wallet[0].amount}
+                Rs.{wallet?.amount}
               </Card.Subtitle>
             </Card.Body>
           </Card>

@@ -17,6 +17,7 @@ const NavLink = ({ link, title, active, setActive }) => {
 };
 
 const Sidebar = () => {
+  const wallet = JSON.parse(localStorage.getItem("wallet"));
   const [active, setActive] = useState(window.location.pathname);
   return (
     <div
@@ -25,34 +26,53 @@ const Sidebar = () => {
     >
       <div className="text-center pb-3">
         <Link
-          to="/wallet"
+          to="/user"
           className="pb-3 mb-3 link-dark text-decoration-none border-bottom"
         >
           <span className="fs-5 fw-bold">Financial Tracker</span>
         </Link>
       </div>
-      <div className="pt-3">
-        <ul className="nav nav-pills flex-column mb-auto">
-          <NavLink
-            link="/user"
-            title="Dashboard"
-            active={active}
-            setActive={setActive}
-          />
-          <NavLink
-            link="/user/registerwallet"
-            title="Register Wallet"
-            active={active}
-            setActive={setActive}
-          />
-          <NavLink
-            link="/user/wallet"
-            title="My Wallet"
-            active={active}
-            setActive={setActive}
-          />
-        </ul>
-      </div>
+      {wallet ? (
+        <div className="pt-3">
+          <ul className="nav nav-pills flex-column mb-auto">
+            <NavLink
+              link="/user"
+              title="Dashboard"
+              active={active}
+              setActive={setActive}
+            />
+            <NavLink
+              link="/user/wallet"
+              title="My Wallet"
+              active={active}
+              setActive={setActive}
+            />
+          </ul>
+        </div>
+      ) : (
+        <div className="pt-3">
+          <ul className="nav nav-pills flex-column mb-auto">
+            <NavLink
+              link="/user"
+              title="Dashboard"
+              active={active}
+              setActive={setActive}
+            />
+            <NavLink
+              link="/user/registerwallet"
+              title="Register Wallet"
+              active={active}
+              setActive={setActive}
+            />
+            <NavLink
+              link="/user/wallet"
+              title="My Wallet"
+              active={active}
+              setActive={setActive}
+            />
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
