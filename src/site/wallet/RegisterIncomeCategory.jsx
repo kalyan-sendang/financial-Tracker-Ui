@@ -3,10 +3,9 @@ import { useState } from "react";
 import { Label } from "reactstrap";
 import axiosInstance from "../../../axiosInstance";
 
-function RegisterCategory({ clickHandler }) {
-  const [expenseCategoryForm, setExpenseCategoryForm] = useState({
+function RegisterIncomeCategory({ clickHandler }) {
+  const [incomeCategoryForm, setIncomeCategoryForm] = useState({
     name: "",
-    maxLimit: "",
   });
 
   function validateName(value) {
@@ -17,22 +16,9 @@ function RegisterCategory({ clickHandler }) {
     return error;
   }
 
-  function validateMaxLimit(value) {
-    let error;
-    if (!value) {
-      error = "Amount is Required";
-    } else if (value < 0) {
-      error = "Amount cannot be negetive";
-    } else if (!Number.isInteger(value)) {
-      error = "Enter in number format";
-    }
-    return error;
-  }
-
   const formikSubmit = async (value, action) => {
     try {
-      await axiosInstance.post(`/expenseCategory`, value);
-      console.log("asdfasdf");
+      await axiosInstance.post(`/incomeCategory`, value);
       clickHandler();
     } catch (error) {
       console.log("Error creating new Category", error);
@@ -40,11 +26,11 @@ function RegisterCategory({ clickHandler }) {
   };
 
   return (
-    <Formik initialValues={expenseCategoryForm} onSubmit={formikSubmit}>
+    <Formik initialValues={incomeCategoryForm} onSubmit={formikSubmit}>
       {({ errors, touched }) => (
         <Form>
           <div className="form-group mt-2">
-            <Label>Expense Category name</Label>
+            <Label>Income Category name</Label>
             <Field
               className="form-control"
               name="name"
@@ -53,18 +39,6 @@ function RegisterCategory({ clickHandler }) {
             />
             {errors.name && touched.name && (
               <div style={{ color: "red" }}>{errors.name}</div>
-            )}
-          </div>
-          <div className="form-group mt-2">
-            <Label>Expense Limit</Label>
-            <Field
-              className="form-control"
-              name="maxLimit"
-              type="Number"
-              validate={validateMaxLimit}
-            />
-            {errors.maxLimit && touched.maxLimit && (
-              <div style={{ color: "red" }}>{errors.maxLimit}</div>
             )}
           </div>
           <div>
@@ -78,4 +52,4 @@ function RegisterCategory({ clickHandler }) {
   );
 }
 
-export default RegisterCategory;
+export default RegisterIncomeCategory;

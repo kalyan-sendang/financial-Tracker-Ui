@@ -7,6 +7,7 @@ import {
   validateNote,
 } from "../../validation/expenseFormvalidation";
 import { useNavigate } from "react-router-dom";
+import RegisterIncomeCategory from "./RegisterIncomeCategory";
 
 function RegisterIncome() {
   const navigate = useNavigate();
@@ -19,8 +20,9 @@ function RegisterIncome() {
     amount: "",
     note: "",
   });
+  const [showCategoryForm, setShowCategoryForm] = useState(false);
 
-  const fetchBooks = async () => {
+  const fetchIncomeCategories = async () => {
     try {
       const response = await axiosInstance.get("/incomeCategory");
       const data = response?.data;
@@ -31,7 +33,7 @@ function RegisterIncome() {
     }
   };
   useEffect(() => {
-    fetchBooks();
+    fetchIncomeCategories();
   }, []);
 
   const formikSubmit = async (value, action) => {
@@ -42,61 +44,87 @@ function RegisterIncome() {
       .catch((err) => err);
     console.log(response);
   };
+
+  const categoryHandler = () => {
+    setShowCategoryForm(true);
+  };
+
+  const clickHandler = () => {
+    fetchIncomeCategories();
+    setShowCategoryForm(false);
+  };
+
   return (
     <div className="name">
-      <div>
-        <h1>Income Registration</h1>
-        <br></br>
-        <Formik initialValues={incomeForm} onSubmit={formikSubmit}>
-          {({ errors, touched }) => (
-            <Form>
-              <div className="form-group">
-                <Label>Select Category</Label>
-                <Field
-                  className="form-control"
-                  as="select"
-                  name="incomeCategoryId"
-                >
-                  {categories.map((category, idx) => (
-                    <option value={category?.incomeCategoryId} key={idx}>
-                      {category?.name}
-                    </option>
-                  ))}
-                </Field>
-              </div>
-              <div className="form-group mt-2">
-                <Label>Amount</Label>
-                <Field
-                  className="form-control"
-                  name="amount"
-                  type="Number"
-                  validate={ValidateAmount}
-                />
-                {errors.amount && touched.amount && (
-                  <div style={{ color: "red" }}>{errors.amount}</div>
-                )}
-              </div>
-              <div className="form-group mt-2">
-                <Label>Note</Label>
-                <Field
-                  className="form-control"
-                  name="note"
-                  type="text"
-                  validate={validateNote}
-                />
-                {errors.note && touched.note && (
-                  <div style={{ color: "red" }}>{errors.note}</div>
-                )}
-              </div>
-              <div>
-                <button type="submit" className="btn btn-primary mt-2 pe-3">
-                  Submit
-                </button>
-              </div>
-            </Form>
-          )}
-        </Formik>
-      </div>
+      {showCategoryForm ? (
+        <div>
+          <RegisterIncomeCategory clickHandler={clickHandler} />
+        </div>
+      ) : (
+        <div>
+          <h1>Income Registration</h1>
+          <br></br>
+          <Formik initialValues={incomeForm} onSubmit={formikSubmit}>
+            {({ errors, touched }) => (
+              <Form>
+                <div className="form-group">
+                  <Label>Select Category</Label>
+                  <Field
+                    className="form-control"
+                    as="select"
+                    name="incomeCategoryId"
+                  >
+                    {categories.map((category, idx) => (
+                      <option value={category?.incomeCategoryId} key={idx}>
+                        {category?.name}
+                      </option>
+                    ))}
+                  </Field>
+                </div>
+                <div className="mt-2">
+                  <button
+                    type="button"
+                    className="btn"
+                    style={{ color: "green", border: "none", outline: "none" }}
+                    onClick={categoryHandler}
+                  >
+                    + Add Category
+                  </button>
+                </div>
+                <div className="form-group mt-2">
+                  <Label>Amount</Label>
+                  <Field
+                    className="form-control"
+                    name="amount"
+                    type="Number"
+                    validate={ValidateAmount}
+                  />
+                  {errors.amount && touched.amount && (
+                    <div style={{ color: "red" }}>{errors.amount}</div>
+                  )}
+                </div>
+                <div className="form-group mt-2">
+                  <Label>Note</Label>
+                  <Field
+                    className="form-control"
+                    name="note"
+                    type="text"
+                    validate={validateNote}
+                  />
+                  {errors.note && touched.note && (
+                    <div style={{ color: "red" }}>{errors.note}</div>
+                  )}
+                </div>
+                <div>
+                  <button type="submit" className="btn btn-primary mt-2 pe-3">
+                    Submit
+                  </button>
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </div>
+      )}
     </div>
   );
 }

@@ -7,7 +7,6 @@ import {
   validateNote,
 } from "../../validation/expenseFormvalidation";
 import { useNavigate } from "react-router-dom";
-import { getWallet } from "../../services/Routes";
 import RegisterCategory from "./RegisterCategory";
 
 function RegisterExpense() {
@@ -21,6 +20,7 @@ function RegisterExpense() {
     amount: "",
     note: "",
   });
+
   const [showCategoryForm, setShowCategoryForm] = useState(false);
 
   const fetchExpenseCategories = async () => {
@@ -50,14 +50,25 @@ function RegisterExpense() {
     setShowCategoryForm(true);
   };
 
+  const clickHandler = () => {
+    fetchExpenseCategories();
+    setShowCategoryForm(false);
+  };
+
   return (
     <div className="name">
       {showCategoryForm ? (
         <div>
-          <button onClick={() => setShowCategoryForm(false)} type="button">
+          {/* <button
+            onClick={() => {
+              setShowCategoryForm(false);
+              fetchExpenseCategories();
+            }}
+            type="button"
+          >
             Close
-          </button>
-          <RegisterCategory />
+          </button> */}
+          <RegisterCategory clickHandler={clickHandler} />
         </div>
       ) : (
         <div>
