@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../../../axiosInstance";
 import { expenseHelperFunc } from "../../services/expenseHelper";
 
-function ExpenseHistogram({ chartsLoaded }) {
-  const [expenseData, setExpenseData] = useState([]);
+function ExpenseHistogram() {
+  const [expenseData, setExpenseData] = useState("");
 
   const fetchExpenseData = async () => {
     const response = await axiosInstance.get("/expenseData");
@@ -37,10 +37,10 @@ function ExpenseHistogram({ chartsLoaded }) {
   };
 
   useEffect(() => {
-    if (chartsLoaded) {
+    if (expenseData) {
       window.google.charts.setOnLoadCallback(expenseHistogram);
     }
-  }, [chartsLoaded]);
+  }, [expenseData]);
 
   return <div id="expense-chart"></div>;
 }

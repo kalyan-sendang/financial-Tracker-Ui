@@ -34,7 +34,6 @@ export const incomeHelperFunc = (data) => {
       });
       resultArray.push(row);
     }
-    console.log("---resultArray---",resultArray)
     return resultArray
   };
 

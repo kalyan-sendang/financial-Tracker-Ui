@@ -3,6 +3,8 @@ import { getWallet } from "../../services/Routes";
 import { Card, Col, Row } from "react-bootstrap";
 import Expense from "./Expense";
 import Income from "./Income";
+import TotalExpenseCard from "./TotalExpenseCard";
+import TotalIncomeCard from "./TotalIncomeCard";
 
 function Wallet() {
   const { data, isLoading } = useQuery({
@@ -18,16 +20,29 @@ function Wallet() {
       <Row>
         <div className="col-3">
           <h2>
-            <b>My Wallet</b>
+            <b>{wallet?.name}</b>
           </h2>
-          <Card style={{ width: "18rem" }}>
+
+          <Card
+            style={{
+              width: "18rem",
+              backgroundColor: "#b8e1f2",
+              border: "none",
+            }}
+          >
             <Card.Body>
-              <Card.Title>{wallet?.name}</Card.Title>
+              <Card.Title>Total Balance</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
                 Rs.{wallet?.amount}
               </Card.Subtitle>
             </Card.Body>
           </Card>
+        </div>
+        <div className="col-3" style={{ paddingTop: "45px" }}>
+          <TotalExpenseCard />
+        </div>
+        <div className="col-3" style={{ paddingTop: "45px" }}>
+          <TotalIncomeCard />
         </div>
       </Row>
 

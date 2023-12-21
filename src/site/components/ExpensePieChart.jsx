@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../../axiosInstance";
 import { pieExpenseHelperFunc } from "../../services/expenseHelper";
 
-function ExpensePieChart({ chartsLoaded }) {
-  const [expenseData, setExpenseData] = useState([]);
+function ExpensePieChart() {
+  const [expenseData, setExpenseData] = useState("");
 
   const fetchExpenseData = async () => {
     const response = await axiosInstance.get("/expenseData");
@@ -22,7 +22,7 @@ function ExpensePieChart({ chartsLoaded }) {
       window.google.visualization.arrayToDataTable(expenseData);
 
     var options = {
-      title: "Expense per month per category",
+      title: "Expense per year per category",
       is3D: true,
     };
 
@@ -34,10 +34,10 @@ function ExpensePieChart({ chartsLoaded }) {
   };
 
   useEffect(() => {
-    if (chartsLoaded) {
+    if (expenseData) {
       window.google.charts.setOnLoadCallback(expensePieChart);
     }
-  }, [chartsLoaded]);
+  }, [expenseData]);
 
   return <div id="expense-piechart"></div>;
 }

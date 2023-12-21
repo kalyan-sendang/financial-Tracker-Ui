@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../../../axiosInstance";
 import { Field, Form, Formik } from "formik";
-import { Label } from "reactstrap";
+import { Button, Label } from "reactstrap";
 import {
   ValidateAmount,
   validateNote,
@@ -54,14 +54,40 @@ function RegisterIncome() {
     setShowCategoryForm(false);
   };
 
+  const handleClick = () => {
+    navigate("/user/wallet");
+  };
+
   return (
     <div className="name">
       {showCategoryForm ? (
         <div>
+          <div>
+            <button
+              className="bg-danger rounded pt-1 pb-1 "
+              style={{ height: "35px", float: "right" }}
+              onClick={() => {
+                setShowCategoryForm(false);
+                fetchIncomeCategories();
+              }}
+              type="button"
+            >
+              <i className="fa-solid fa-xmark fa-fade fa-lg"></i>
+            </button>
+          </div>
           <RegisterIncomeCategory clickHandler={clickHandler} />
         </div>
       ) : (
         <div>
+          <div>
+            <Button
+              className="bg-danger rounded pt-1 pb-1 "
+              style={{ height: "35px", float: "right" }}
+              onClick={handleClick}
+            >
+              <i className="fa-solid fa-xmark fa-fade fa-lg"></i>
+            </Button>
+          </div>
           <h1>Income Registration</h1>
           <br></br>
           <Formik initialValues={incomeForm} onSubmit={formikSubmit}>

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../../axiosInstance";
 import { pieIncomeHelperFunc } from "../../services/incomeHelper";
 
-function IncomePieChart({ chartsLoaded }) {
-  const [incomeData, setIncomeData] = useState([]);
+function IncomePieChart() {
+  const [incomeData, setIncomeData] = useState("");
 
   const fetchIncomeData = async () => {
     const response = await axiosInstance.get("/incomeData");
@@ -22,7 +22,7 @@ function IncomePieChart({ chartsLoaded }) {
       window.google.visualization.arrayToDataTable(incomeData);
 
     var options = {
-      title: "Income per month per category",
+      title: "Income per year per category",
       is3D: true,
     };
 
@@ -34,10 +34,10 @@ function IncomePieChart({ chartsLoaded }) {
   };
 
   useEffect(() => {
-    if (chartsLoaded) {
+    if (incomeData) {
       window.google.charts.setOnLoadCallback(incomePieChart);
     }
-  }, [chartsLoaded]);
+  }, [incomeData]);
 
   return <div id="income-piechart"></div>;
 }

@@ -56,9 +56,9 @@ export const pieExpenseHelperFunc = (data) => {
 
   Object.keys(obj).forEach((year) => {
     perYear[year] = [["Category", "Amount"]];
-    Object.keys(obj[year]).forEach(cat => {
-      perYear[year].push([cat, obj[year][cat]])
-    })
+    Object.keys(obj[year]).forEach((cat) => {
+      perYear[year].push([cat, obj[year][cat]]);
+    });
   });
-  return perYear
+  return perYear;
 };

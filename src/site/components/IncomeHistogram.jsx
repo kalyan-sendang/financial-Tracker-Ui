@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { incomeHelperFunc } from "../../services/incomeHelper";
 import axiosInstance from "../../../axiosInstance";
 
-function IncomeHistogram({ chartsLoaded }) {
-  const [incomeData, setIncomeData] = useState([]);
+function IncomeHistogram() {
+  const [incomeData, setIncomeData] = useState("");
 
   const fetchIncomeData = async () => {
     const response = await axiosInstance.get("/incomeData");
@@ -36,10 +36,10 @@ function IncomeHistogram({ chartsLoaded }) {
   };
 
   useEffect(() => {
-    if (chartsLoaded) {
+    if (incomeData) {
       window.google.charts.setOnLoadCallback(incomeHistogram);
     }
-  });
+  }, [incomeData]);
 
   return <div id="income-chart"></div>;
 }

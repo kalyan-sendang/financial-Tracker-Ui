@@ -26,29 +26,34 @@ function RegisterIncomeCategory({ clickHandler }) {
   };
 
   return (
-    <Formik initialValues={incomeCategoryForm} onSubmit={formikSubmit}>
-      {({ errors, touched }) => (
-        <Form>
-          <div className="form-group mt-2">
-            <Label>Income Category name</Label>
-            <Field
-              className="form-control"
-              name="name"
-              type="text"
-              validate={validateName}
-            />
-            {errors.name && touched.name && (
-              <div style={{ color: "red" }}>{errors.name}</div>
-            )}
-          </div>
-          <div>
-            <button type="submit" className="btn btn-primary mt-2 pe-3">
-              Submit
-            </button>
-          </div>
-        </Form>
-      )}
-    </Formik>
+    <div>
+      <h3>
+        <b>Add Income category</b>
+      </h3>
+      <Formik initialValues={incomeCategoryForm} onSubmit={formikSubmit}>
+        {({ errors, touched }) => (
+          <Form>
+            <div className="form-group mt-2">
+              <Label>Income Category name</Label>
+              <Field
+                className="form-control"
+                name="name"
+                type="text"
+                validate={validateName}
+              />
+              {errors.name && touched.name && (
+                <div style={{ color: "red" }}>{errors.name}</div>
+              )}
+            </div>
+            <div>
+              <button type="submit" className="btn btn-primary mt-2 pe-3">
+                Submit
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 }
 
