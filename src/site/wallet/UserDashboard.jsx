@@ -5,11 +5,21 @@ import { Card, Col, Container, Row } from "reactstrap";
 import ExpensePieChart from "../components/ExpensePieChart";
 import IncomePieChart from "../components/IncomePieChart";
 import LineChart from "../components/LineChart";
+import axiosInstance from "../../../axiosInstance";
 
 function UserDashboard() {
   const [chartsLoaded, setChartsLoaded] = useState(false);
   const user = JSON.parse(localStorage.getItem("userprofile"));
-  console.log(user);
+
+  const [incomeData, setIncomeData] = useState("");
+  const [expenseData, setExpenseData] = useState("");
+
+  const getData = async () => {
+    const expenseRes = await axiosInstance.get("/expenseData");
+    setExpenseData(expenseRes?.data?.response);
+    const incomeRes = await axiosInstance.get("/incomeData");
+    setIncomeData(incomeRes?.data?.response);
+  };
   useEffect(() => {
     if (!window.google.visualization) {
       window.google.charts.load("current", { packages: ["corechart"] });
@@ -17,6 +27,8 @@ function UserDashboard() {
     window.google.charts.setOnLoadCallback(() => {
       setChartsLoaded(true);
     });
+
+    getData();
   }, []);
 
   return (
@@ -34,23 +46,23 @@ function UserDashboard() {
             <Row>
               <Col>
                 <Card>
-                  <ExpensePieChart />
+                  <ExpensePieChart expenseData={expenseData} />
                 </Card>
               </Col>
               <Col>
                 <Card>
-                  <IncomePieChart />
+                  <IncomePieChart incomeData={incomeData} />
                 </Card>
               </Col>
             </Row>
           </Container>
 
           <hr className="bg-info border-3 border-top border-secondary" />
-          <LineChart />
+          <LineChart incomeData={incomeData} expenseData={expenseData} />
           <hr className="bg-info border-3 border-top border-secondary" />
-          <ExpenseHistogram />
+          <ExpenseHistogram expenseData={expenseData} />
           <hr className="bg-info border-3 border-top border-secondary" />
-          <IncomeHistogram />
+          <IncomeHistogram incomeData={incomeData} />
         </>
       )}
     </div>

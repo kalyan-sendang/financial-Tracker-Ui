@@ -2,6 +2,7 @@ import { Field, Form, Formik } from "formik";
 import { useState } from "react";
 import { Button, Label } from "reactstrap";
 import axiosInstance from "../../../axiosInstance";
+import "../../styles/styles.css";
 
 function RegisterCategory({ clickHandler }) {
   const [expenseCategoryForm, setExpenseCategoryForm] = useState({
@@ -32,7 +33,6 @@ function RegisterCategory({ clickHandler }) {
   const formikSubmit = async (value, action) => {
     try {
       await axiosInstance.post(`/expenseCategory`, value);
-      console.log("asdfasdf");
       clickHandler();
     } catch (error) {
       console.log("Error creating new Category", error);

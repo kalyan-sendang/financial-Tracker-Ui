@@ -1,10 +1,10 @@
-export const expenseHelperFunc = (data) => {
+export const expenseHelperFunc = (data = []) => {
   // Create an array to store the result
   const resultArray = [];
 
   // Get unique category ids
   const categoryIds = [
-    ...new Set(data.map((item) => item.expenseCategoryName)),
+    ...new Set(data?.map((item) => item?.expenseCategoryName)),
   ];
 
   // Add header row to the result array
@@ -14,7 +14,7 @@ export const expenseHelperFunc = (data) => {
   const monthData = {};
 
   // Populate monthData dictionary
-  data.forEach((item) => {
+  data?.forEach((item) => {
     const key = `${item.month}-${item.year}`;
     if (!monthData[key]) {
       monthData[key] = {};
@@ -38,11 +38,13 @@ export const expenseHelperFunc = (data) => {
   return resultArray;
 };
 
-export const pieExpenseHelperFunc = (data) => {
+export const pieExpenseHelperFunc = (data = []) => {
   const perYear = {};
   const obj = {};
 
-  data.forEach((item) => {
+  console.log(data);
+
+  data?.forEach((item) => {
     const { year, expenseCategoryName, totalAmount } = item;
     if (!obj[year]) {
       obj[year] = {};

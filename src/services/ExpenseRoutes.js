@@ -1,13 +1,21 @@
 import axiosInstance from "../../axiosInstance";
 
 export const getExpenses = async () => {
-  return axiosInstance.get("/expense");
+  return await axiosInstance.get("/expense");
 };
 
 export const addExpense = async () => {
-  return axiosInstance.post("/expense");
+  return await axiosInstance.post("/expense");
 };
 
 export const getTotalExpense = async () => {
-  return axiosInstance.get("/totalExpense");
+  return await axiosInstance.get("/totalExpense");
+};
+
+export const getTotalExpensePerCategory = async (id) => {
+  return await axiosInstance.get(`/totalExpense/${id}`);
+};
+
+export const getExpenseCategory = async () => {
+  return await axiosInstance.get("/expenseCategory");
 };

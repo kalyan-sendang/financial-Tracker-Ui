@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
-import axiosInstance from "../../../axiosInstance";
 import { pieIncomeHelperFunc } from "../../services/incomeHelper";
 
-function IncomePieChart() {
+function IncomePieChart({ incomeData: data }) {
   const [incomeData, setIncomeData] = useState("");
 
   const fetchIncomeData = async () => {
-    const response = await axiosInstance.get("/incomeData");
-    const returnArray = pieIncomeHelperFunc(response?.data?.response);
+    const returnArray = pieIncomeHelperFunc(data);
     const year = 2023;
 
     setIncomeData(returnArray[year]);
   };
 
   useEffect(() => {
-    fetchIncomeData();
-  }, []);
+    data && fetchIncomeData();
+  }, [data]);
 
   const incomePieChart = () => {
     const incomeChart =

@@ -11,6 +11,10 @@ import RegisterWallet from "./site/wallet/RegisterWallet";
 import Wallet from "./site/wallet/Wallet";
 import RegisterExpense from "./site/wallet/RegisterExpense";
 import RegisterIncome from "./site/wallet/RegisterIncome";
+import Category from "./site/components/category/Category";
+import UpdateExpenseCategory from "./site/components/category/UpdateExpenseCategory";
+import AddExpenseCategory from "./site/components/category/AddExpenseCategory";
+import AddIncomeCategory from "./site/components/category/AddIncomeCategory";
 
 const AppRoutes = () => {
   return (
@@ -49,6 +53,15 @@ const AppRoutes = () => {
             <Route index element={<Wallet />} />
             <Route path="registerExpense" element={<RegisterExpense />} />
             <Route path="registerIncome" element={<RegisterIncome />} />
+          </Route>
+          <Route path="category">
+            <Route index element={<Category />} />
+            <Route
+              path="updateExpenseCategory/:id"
+              element={<UpdateExpenseCategory />}
+            />
+            <Route path="expenseCategory" element={<AddExpenseCategory />} />
+            <Route path="incomeCategory" element={<AddIncomeCategory />} />
           </Route>
         </Route>
       </Routes>

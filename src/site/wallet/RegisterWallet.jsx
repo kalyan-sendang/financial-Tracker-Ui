@@ -39,7 +39,6 @@ function RegisterWallet() {
       const { status } = await axiosInstance.post("/wallet", value);
       if (status === 200) {
         const response = await getWallet();
-        console.log(response);
         localStorage.setItem(
           "wallet",
           JSON.stringify(response?.data?.response)

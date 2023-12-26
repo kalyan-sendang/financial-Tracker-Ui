@@ -42,7 +42,6 @@ function RegisterIncome() {
       .post(`/income/${walletId}`, value)
       .then(() => navigate("/user/wallet"))
       .catch((err) => err);
-    console.log(response);
   };
 
   const categoryHandler = () => {

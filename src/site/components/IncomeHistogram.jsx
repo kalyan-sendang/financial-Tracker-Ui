@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
 import { incomeHelperFunc } from "../../services/incomeHelper";
-import axiosInstance from "../../../axiosInstance";
 
-function IncomeHistogram() {
+function IncomeHistogram({ incomeData: data }) {
   const [incomeData, setIncomeData] = useState("");
 
   const fetchIncomeData = async () => {
-    const response = await axiosInstance.get("/incomeData");
-    const returnArray = incomeHelperFunc(response?.data?.response);
+    const returnArray = incomeHelperFunc(data);
     setIncomeData(returnArray);
   };
   useEffect(() => {
-    fetchIncomeData();
-  }, []);
+    data && fetchIncomeData();
+  }, [data]);
 
   const incomeHistogram = () => {
     const incomeChart =

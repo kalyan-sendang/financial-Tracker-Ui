@@ -1,24 +1,17 @@
 import { useEffect, useState } from "react";
-import axiosInstance from "../../../axiosInstance";
 import { lineHelperFunc } from "../../services/LineHelper";
 
-function LineChart() {
+function LineChart({ expenseData, incomeData }) {
   const [linedata, setLineData] = useState("");
 
   const fetchExpenseAndIncomeData = async () => {
-    const response = await axiosInstance.get("/expenseData");
-
-    const res = await axiosInstance.get("/incomeData");
-    const returnArray = lineHelperFunc(
-      response?.data?.response,
-      res?.data?.response
-    );
+    const returnArray = lineHelperFunc(expenseData, incomeData);
     setLineData(returnArray);
   };
 
   useEffect(() => {
-    fetchExpenseAndIncomeData();
-  }, []);
+    if (incomeData && expenseData) fetchExpenseAndIncomeData();
+  }, [incomeData, expenseData]);
 
   const lineChart = () => {
     const lineChart = window.google.visualization.arrayToDataTable(linedata);
@@ -26,7 +19,7 @@ function LineChart() {
     var options = {
       title: "Income vs Expense",
       vAxis: {
-        title: "Amoount",
+        title: "Amount",
       },
       hAxis: {
         title: "Months",

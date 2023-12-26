@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
-import axiosInstance from "../../../axiosInstance";
+import { useEffect, useState } from "react";
 import { expenseHelperFunc } from "../../services/expenseHelper";
 
-function ExpenseHistogram() {
+function ExpenseHistogram({ expenseData: data }) {
   const [expenseData, setExpenseData] = useState("");
 
   const fetchExpenseData = async () => {
-    const response = await axiosInstance.get("/expenseData");
-    const returnArray = expenseHelperFunc(response?.data?.response);
+    const returnArray = expenseHelperFunc(data);
     setExpenseData(returnArray);
   };
 
   useEffect(() => {
-    fetchExpenseData();
-  }, []);
+    data && fetchExpenseData();
+  }, [data]);
 
   const expenseHistogram = () => {
     const expenseChart =

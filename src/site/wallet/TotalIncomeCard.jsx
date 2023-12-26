@@ -12,7 +12,6 @@ function TotalIncomeCard() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  console.log(data?.data.response);
   return (
     <div>
       <Card

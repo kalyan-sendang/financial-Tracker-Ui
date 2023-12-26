@@ -8,6 +8,7 @@ import {
 } from "../../validation/expenseFormvalidation";
 import { useNavigate } from "react-router-dom";
 import RegisterCategory from "./RegisterCategory";
+import { emitErrorToast } from "../components/toastify/toastEmitter";
 
 function RegisterExpense() {
   const navigate = useNavigate();
@@ -38,12 +39,13 @@ function RegisterExpense() {
   }, []);
 
   const formikSubmit = async (value, action) => {
-    console.log(walletId);
-    const response = await axiosInstance
-      .post(`/expense/${walletId}`, value)
-      .then(() => navigate("/user/wallet"))
-      .catch((err) => err);
-    console.log(response);
+    try {
+      await axiosInstance.post(`/expense/${walletId}`, value);
+      navigate("/user/wallet");
+    } catch (error) {
+      const responseData = error?.response?.data?.message;
+      emitErrorToast(responseData);
+    }
   };
 
   const categoryHandler = () => {
@@ -101,7 +103,8 @@ function RegisterExpense() {
                   >
                     {categories.map((category, idx) => (
                       <option value={category?.expenseCategoryId} key={idx}>
-                        {category.name}
+                        <span>{category.name}</span>
+                        <span> MaxLimit: Rs. {category.maxLimit}</span>
                       </option>
                     ))}
                   </Field>

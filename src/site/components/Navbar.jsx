@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -6,6 +7,7 @@ function Navbar() {
   const userProfile = JSON.parse(localStorage.getItem("userprofile"));
   const logoutHandler = () => {
     localStorage.removeItem("userprofile");
+    Cookies.removeItem("auth");
     navigate("/");
   };
 

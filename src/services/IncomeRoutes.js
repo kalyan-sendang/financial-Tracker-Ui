@@ -11,3 +11,7 @@ export const addIncome = async () => {
 export const getTotalIncome = async () => {
   return axiosInstance.get("/totalIncome");
 };
+
+export const getIncomeCategory = async () => {
+  return axiosInstance.get("/incomeCategory");
+};

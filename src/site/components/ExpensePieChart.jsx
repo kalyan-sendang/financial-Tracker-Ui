@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
-import axiosInstance from "../../../axiosInstance";
 import { pieExpenseHelperFunc } from "../../services/expenseHelper";
 
-function ExpensePieChart() {
+function ExpensePieChart({ expenseData: data }) {
+  console.log("first");
   const [expenseData, setExpenseData] = useState("");
 
   const fetchExpenseData = async () => {
-    const response = await axiosInstance.get("/expenseData");
-    const returnArray = pieExpenseHelperFunc(response?.data?.response);
+    const returnArray = pieExpenseHelperFunc(data);
     const year = 2023;
 
     setExpenseData(returnArray[year]);
   };
 
   useEffect(() => {
-    fetchExpenseData();
-  }, []);
+    if (data) fetchExpenseData();
+  }, [data]);
 
   const expensePieChart = () => {
     const expenseChart =

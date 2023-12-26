@@ -1,4 +1,4 @@
-export const lineHelperFunc = (expenseData, incomeData) => {
+export const lineHelperFunc = (expenseData = [], incomeData = []) => {
   const mergedData = [];
 
   const monthNames = [
@@ -20,12 +20,12 @@ export const lineHelperFunc = (expenseData, incomeData) => {
   for (let month = 1; month < monthNames.length; month++) {
     const monthName = monthNames[month];
     // Find corresponding income item for the month
-    const matchingIncomeItem = incomeData.find(
+    const matchingIncomeItem = incomeData?.find(
       (incomeItem) => incomeItem.month === month
     );
 
     // Find corresponding expense item for the month
-    const matchingExpenseItem = expenseData.find(
+    const matchingExpenseItem = expenseData?.find(
       (expenseItem) => expenseItem.month === month
     );
 
