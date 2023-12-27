@@ -7,7 +7,7 @@ import {
   validateNote,
 } from "../../validation/expenseFormvalidation";
 import { useNavigate } from "react-router-dom";
-import RegisterCategory from "./RegisterCategory";
+import RegisterCategory from "./RegisterExpenseCategory";
 import { emitErrorToast } from "../components/toastify/toastEmitter";
 
 function RegisterExpense() {

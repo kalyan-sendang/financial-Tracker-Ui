@@ -1,4 +1,4 @@
-import RegisterCategory from "../../wallet/RegisterCategory";
+import RegisterCategory from "../../wallet/RegisterExpenseCategory";
 import { useNavigate } from "react-router-dom";
 
 function AddExpenseCategory() {
@@ -19,7 +19,7 @@ function AddExpenseCategory() {
         >
           <i className="fa-solid fa-xmark fa-fade fa-lg"></i>
         </button>
-        <RegisterCategory />
+        <RegisterCategory clickHandler={clickHandler} />
       </div>
     </div>
   );

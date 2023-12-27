@@ -47,9 +47,13 @@ function Wallet() {
       </Row>
 
       <div style={{ marginTop: "2rem" }}>
-        <h3>
-          <b>Transactions</b>
-        </h3>
+        <div className="d-flex justify-content-center">
+          <h3>
+            <b>Transactions</b>
+            <hr></hr>
+          </h3>
+        </div>
+
         <Row>
           <Col>
             <Expense />

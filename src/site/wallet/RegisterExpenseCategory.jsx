@@ -3,6 +3,10 @@ import { useState } from "react";
 import { Button, Label } from "reactstrap";
 import axiosInstance from "../../../axiosInstance";
 import "../../styles/styles.css";
+import {
+  emitErrorToast,
+  emitSuccessToast,
+} from "../components/toastify/toastEmitter";
 
 function RegisterCategory({ clickHandler }) {
   const [expenseCategoryForm, setExpenseCategoryForm] = useState({
@@ -32,9 +36,12 @@ function RegisterCategory({ clickHandler }) {
 
   const formikSubmit = async (value, action) => {
     try {
-      await axiosInstance.post(`/expenseCategory`, value);
+      const response = await axiosInstance.post(`/expenseCategory`, value);
+      emitSuccessToast(response?.data?.message);
       clickHandler();
     } catch (error) {
+      const res = error?.response?.data?.message;
+      emitErrorToast(res);
       console.log("Error creating new Category", error);
     }
   };

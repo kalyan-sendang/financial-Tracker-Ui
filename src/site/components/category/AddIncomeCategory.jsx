@@ -20,7 +20,7 @@ function AddIncomeCategory() {
           <i className="fa-solid fa-xmark fa-fade fa-lg"></i>
         </button>
 
-        <RegisterIncomeCategory />
+        <RegisterIncomeCategory clickHandler={clickHandler} />
       </div>
     </div>
   );

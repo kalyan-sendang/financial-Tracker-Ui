@@ -2,6 +2,10 @@ import { Field, Form, Formik } from "formik";
 import { useState } from "react";
 import { Label } from "reactstrap";
 import axiosInstance from "../../../axiosInstance";
+import {
+  emitErrorToast,
+  emitSuccessToast,
+} from "../components/toastify/toastEmitter";
 
 function RegisterIncomeCategory({ clickHandler }) {
   const [incomeCategoryForm, setIncomeCategoryForm] = useState({
@@ -18,9 +22,13 @@ function RegisterIncomeCategory({ clickHandler }) {
 
   const formikSubmit = async (value, action) => {
     try {
-      await axiosInstance.post(`/incomeCategory`, value);
+      const response = await axiosInstance.post(`/incomeCategory`, value);
+      console.log(response?.data?.message);
+      emitSuccessToast(response?.data?.message);
       clickHandler();
     } catch (error) {
+      const res = error?.response?.data?.message;
+      emitErrorToast(res);
       console.log("Error creating new Category", error);
     }
   };

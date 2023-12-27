@@ -1,25 +1,20 @@
-import { useQueries, useQuery } from "@tanstack/react-query";
 import { Button } from "react-bootstrap";
-import { getTotalExpensePerCategory } from "../../../services/ExpenseRoutes";
 
-function ExpenseCategoryList({ expenseCategory, onUpdate, onDelete }) {
-  //Define an array of queries for each category
-  const queries = expenseCategory.map((category) => ({
-    queryKey: ["getExpenseByCategory", category.expenseCategoryId],
-    queryFn: () => getTotalExpensePerCategory(category.expenseCategoryId),
-  }));
-
-  // Use useQueries to execute multiple queries
-  const results = useQueries(queries);
+function ExpenseCategoryList({
+  expenseCategory,
+  onUpdate,
+  onDelete,
+  amountSpent,
+}) {
+  const maxLimit = expenseCategory?.maxLimit || 0;
 
   return (
     <tr>
       <th>{expenseCategory?.expenseCategoryId}</th>
       <th>{expenseCategory?.name}</th>
+      <th>Rs.{expenseCategory?.maxLimit}</th>
       <th>
-        {expenseCategory?.maxLimit}
-        {"   "}Amount Left:{" "}
-        {results.map((result) => result.data?.response || 0)}
+        Rs.{maxLimit - (amountSpent[expenseCategory?.expenseCategoryId] || 0)}
       </th>
       <th className="d-flex justify-content-center ">
         <Button

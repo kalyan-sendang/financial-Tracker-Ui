@@ -42,8 +42,6 @@ export const pieExpenseHelperFunc = (data = []) => {
   const perYear = {};
   const obj = {};
 
-  console.log(data);
-
   data?.forEach((item) => {
     const { year, expenseCategoryName, totalAmount } = item;
     if (!obj[year]) {

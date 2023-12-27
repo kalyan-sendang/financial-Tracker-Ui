@@ -7,7 +7,7 @@ function Navbar() {
   const userProfile = JSON.parse(localStorage.getItem("userprofile"));
   const logoutHandler = () => {
     localStorage.removeItem("userprofile");
-    Cookies.removeItem("auth");
+    Cookies.remove("auth");
     navigate("/");
   };
 

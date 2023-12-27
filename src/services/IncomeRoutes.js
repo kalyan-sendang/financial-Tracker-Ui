@@ -3,13 +3,16 @@ import axiosInstance from "../../axiosInstance";
 export const getIncomes = async () => {
   return axiosInstance.get("/income");
 };
+export const getIncomePerMonth = async (id) => {
+  return await axiosInstance.get(`/income/income-per-month/${id}`);
+};
 
 export const addIncome = async () => {
   return axiosInstance.post("/income");
 };
 
 export const getTotalIncome = async () => {
-  return axiosInstance.get("/totalIncome");
+  return axiosInstance.get("/income/totalIncome");
 };
 
 export const getIncomeCategory = async () => {

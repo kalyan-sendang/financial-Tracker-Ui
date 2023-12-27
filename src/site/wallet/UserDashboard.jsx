@@ -15,9 +15,9 @@ function UserDashboard() {
   const [expenseData, setExpenseData] = useState("");
 
   const getData = async () => {
-    const expenseRes = await axiosInstance.get("/expenseData");
+    const expenseRes = await axiosInstance.get("expense/expenseData");
     setExpenseData(expenseRes?.data?.response);
-    const incomeRes = await axiosInstance.get("/incomeData");
+    const incomeRes = await axiosInstance.get("income/incomeData");
     setIncomeData(incomeRes?.data?.response);
   };
   useEffect(() => {

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { pieExpenseHelperFunc } from "../../services/expenseHelper";
 
 function ExpensePieChart({ expenseData: data }) {
-  console.log("first");
   const [expenseData, setExpenseData] = useState("");
 
   const fetchExpenseData = async () => {

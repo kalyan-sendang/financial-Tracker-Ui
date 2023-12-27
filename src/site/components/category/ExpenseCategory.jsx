@@ -1,7 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { Button, Table } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import { getExpenseCategory } from "../../../services/ExpenseRoutes";
+import {
+  expensePerCategory,
+  getExpenseCategory,
+} from "../../../services/ExpenseRoutes";
 import ExpenseCategoryList from "./ExpenseCategoryList";
 import axiosInstance from "../../../../axiosInstance";
 
@@ -11,7 +14,11 @@ function ExpenseCategory() {
     queryKey: ["getExpenseCategory"],
     queryFn: () => getExpenseCategory(),
   });
-
+  const { data: totalExpense } = useQuery({
+    queryKey: [`getExpenseByCategory`],
+    queryFn: () => expensePerCategory(),
+  });
+  const amountSpent = totalExpense?.data?.response || {};
   const expenseCategories = data?.data?.response;
   if (isLoading) {
     return <div>Loading...</div>;
@@ -56,6 +63,7 @@ function ExpenseCategory() {
             <th>ExpenseCategoryId</th>
             <th>Name</th>
             <th>Maximum Limit</th>
+            <th>Amount Left</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -67,6 +75,7 @@ function ExpenseCategory() {
               expenseCategory={expenseCategory}
               onDelete={onDelete}
               onUpdate={onUpdate}
+              amountSpent={amountSpent}
             />
           ))}
         </tbody>
