@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { incomeHelperFunc } from "../../services/incomeHelper";
+import { incomeHelperFunc } from "../../../services/incomeHelper";
 
 function IncomeHistogram({ incomeData: data }) {
   const [incomeData, setIncomeData] = useState("");
@@ -17,7 +17,7 @@ function IncomeHistogram({ incomeData: data }) {
       window.google.visualization.arrayToDataTable(incomeData);
 
     var options = {
-      title: "Income per month per category",
+      title: "Income per month per category (2023)",
       vAxis: {
         title: "Income amount",
       },

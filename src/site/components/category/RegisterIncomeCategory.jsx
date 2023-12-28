@@ -1,11 +1,8 @@
 import { Field, Form, Formik } from "formik";
 import { useState } from "react";
 import { Label } from "reactstrap";
-import axiosInstance from "../../../axiosInstance";
-import {
-  emitErrorToast,
-  emitSuccessToast,
-} from "../components/toastify/toastEmitter";
+import axiosInstance from "../../../../axiosInstance";
+import { emitErrorToast, emitSuccessToast } from "../toastify/toastEmitter";
 
 function RegisterIncomeCategory({ clickHandler }) {
   const [incomeCategoryForm, setIncomeCategoryForm] = useState({

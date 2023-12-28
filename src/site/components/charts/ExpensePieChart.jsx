@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { pieExpenseHelperFunc } from "../../services/expenseHelper";
+import { pieExpenseHelperFunc } from "../../../services/expenseHelper";
 
 function ExpensePieChart({ expenseData: data }) {
   const [expenseData, setExpenseData] = useState("");
@@ -20,7 +20,7 @@ function ExpensePieChart({ expenseData: data }) {
       window.google.visualization.arrayToDataTable(expenseData);
 
     var options = {
-      title: "Expense per year per category",
+      title: "Expense per year per category (2023)",
       is3D: true,
     };
 

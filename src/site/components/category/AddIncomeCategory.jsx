@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import RegisterIncomeCategory from "../../wallet/RegisterIncomeCategory";
+import RegisterIncomeCategory from "./RegisterIncomeCategory";
 
 function AddIncomeCategory() {
   const navigate = useNavigate();

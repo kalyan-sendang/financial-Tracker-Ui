@@ -1,12 +1,9 @@
 import { Field, Form, Formik } from "formik";
 import { useState } from "react";
 import { Button, Label } from "reactstrap";
-import axiosInstance from "../../../axiosInstance";
-import "../../styles/styles.css";
-import {
-  emitErrorToast,
-  emitSuccessToast,
-} from "../components/toastify/toastEmitter";
+import axiosInstance from "../../../../axiosInstance";
+import "../../../styles/styles.css";
+import { emitErrorToast, emitSuccessToast } from "../toastify/toastEmitter";
 
 function RegisterCategory({ clickHandler }) {
   const [expenseCategoryForm, setExpenseCategoryForm] = useState({

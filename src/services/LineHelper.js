@@ -16,30 +16,35 @@ export const lineHelperFunc = (expenseData = [], incomeData = []) => {
     "Dec",
   ];
 
+  let year = 2023;
+
   // Iterate over months (assuming 12 months in a year)
-  for (let month = 1; month < monthNames.length; month++) {
-    const monthName = monthNames[month];
+  for (let month = 1; month <= monthNames?.length; month++) {
+    const monthName = monthNames[month - 1];
     // Find corresponding income item for the month
-    const matchingIncomeItem = incomeData?.find(
-      (incomeItem) => incomeItem.month === month
+    const matchingIncomeItem = incomeData?.filter(
+      (incomeItem) => incomeItem?.month === month && incomeItem?.year === year
     );
 
     // Find corresponding expense item for the month
-    const matchingExpenseItem = expenseData?.find(
-      (expenseItem) => expenseItem.month === month
+    const matchingExpenseItem = expenseData?.filter(
+      (expenseItem) =>
+        expenseItem?.month === month && expenseItem?.year === year
     );
 
-    // Create an entry for the month, setting default values if data is missing
     const entry = {
-      year: matchingIncomeItem
-        ? matchingIncomeItem.year
-        : matchingExpenseItem?.year || 0,
+      year: year,
       month: monthName,
-      income: matchingIncomeItem ? matchingIncomeItem.totalAmount : 0,
-      expense: matchingExpenseItem ? matchingExpenseItem.totalAmount : 0,
+      income: 0,
+      expense: 0,
     };
+    matchingExpenseItem?.forEach((item) => {
+      entry.expense += item?.totalAmount;
+    });
+    matchingIncomeItem?.forEach((item) => {
+      entry.income += item?.totalAmount;
+    });
 
-    // Push the entry to the mergedData array
     mergedData.push(entry);
   }
 
@@ -47,6 +52,7 @@ export const lineHelperFunc = (expenseData = [], incomeData = []) => {
     ["month", "Income", "Expense"],
     ...Array.from({ length: 12 }, (_, i) => {
       const monthData = mergedData.find((item) => item.month === monthNames[i]);
+
       return [
         monthNames[i], // Month
         monthData ? monthData.income : 0, // Income
@@ -54,5 +60,6 @@ export const lineHelperFunc = (expenseData = [], incomeData = []) => {
       ];
     }),
   ];
+
   return transformedData;
 };

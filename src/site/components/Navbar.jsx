@@ -1,52 +1,44 @@
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from "reactstrap";
+import Notification from "../notification/Notification";
 
 function Navbar() {
   const navigate = useNavigate();
   const userProfile = JSON.parse(localStorage.getItem("userprofile"));
+  // const [notificationEnabled, setNotificationEnabled] = useState(false);
   const logoutHandler = () => {
     localStorage.removeItem("userprofile");
+    localStorage.removeItem("wallet");
     Cookies.remove("auth");
     navigate("/");
   };
 
-  //   const handleSearch = () => {
-  //     if (search?.length > 0) {
-  //       setSearch("");
-  //       navigate(`?query=${search}&page=1`);
-  //     }
-  //   };
+  // const handleClick = () => {
+  //   setNotificationEnabled(true);
+  // };
   return (
     <div>
+      {/* {notificationEnabled && <Notification />} */}
       <nav className="navbar navbar-expand">
-        {/* <Link to="/wallet" className="navbar-brand">
-          <h2>
-            <b>Financial Tracker</b>
-          </h2>
-        </Link> */}
         <div className="navbar-collapse" id="navbarSupportedContent">
           <div
             className="container justify-content-end"
             style={{ display: "flex" }}
           >
-            <ul className="navbar-nav mr-auto">
-              <li
-                className="nav-item active pt-2 "
-                style={{ paddingRight: "1rem" }}
-              >
-                <Link>
-                  <i className="fa-solid fa-bell fa-lg"></i>
-                </Link>
+            <ul className="navbar-nav mr-auto d-flex align-items-center ">
+              <li className="nav-item active" style={{ paddingRight: "1rem" }}>
+                <Button
+                  className="bg-white text-primary border-0 "
+                  type="button"
+                  // onClick={handleClick}
+                >
+                  <i className="fa-solid fa-bell fa-lg "></i>
+                </Button>
               </li>
             </ul>
             <ul className="navbar-nav mr-auto">
-              {/* <li className="nav-item active">
-                <a className="nav-link" href="register">
-              
-                  SignUp<span className="sr-only"></span>
-                </a>
-              </li> */}
               {userProfile ? (
                 <li className="nav-item dropdown">
                   <a
@@ -65,7 +57,7 @@ function Navbar() {
                     aria-labelledby="navbarDropdown"
                   >
                     <li>
-                      <Link to="/profile" className="dropdown-item">
+                      <Link to="/user/profile" className="dropdown-item">
                         Profile
                       </Link>
                     </li>

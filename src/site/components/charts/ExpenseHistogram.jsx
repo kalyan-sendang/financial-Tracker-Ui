@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { expenseHelperFunc } from "../../services/expenseHelper";
+import { expenseHelperFunc } from "../../../services/expenseHelper";
 
 function ExpenseHistogram({ expenseData: data }) {
   const [expenseData, setExpenseData] = useState("");
@@ -18,7 +18,7 @@ function ExpenseHistogram({ expenseData: data }) {
       window.google.visualization.arrayToDataTable(expenseData);
 
     var options = {
-      title: "Expense per month per category",
+      title: "Expense per month per category (2023)",
       vAxis: {
         title: "Expense amount",
       },

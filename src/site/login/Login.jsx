@@ -7,8 +7,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { Col, Row } from "react-bootstrap";
 import axiosInstance from "../../../axiosInstance";
+import { getWallet } from "../../services/Routes";
 
-const LoginUser = () => {
+const LoginUser = ({ setUser }) => {
   const navigate = useNavigate();
   const [userForm, setUserForm] = useState({
     userName: "",
@@ -47,10 +48,22 @@ const LoginUser = () => {
       if (status === 200 && Cookies.get("auth")) {
         const response = await axiosInstance.get(`/userprofile`);
         localStorage.setItem("userprofile", JSON.stringify(response?.data));
-        navigate("/user");
+        setUser(response?.data);
+        const resData = await getWallet();
+        console.log(resData?.data?.response);
+        if (resData?.data?.success === true) {
+          localStorage.setItem(
+            "wallet",
+            JSON.stringify(resData?.data?.response)
+          );
+          navigate("/user/wallet");
+        }
+        // else {
+        //   navigate("/wallet/registerwallet");
+        // }
       }
     } catch (error) {
-      console.error("Login Error ", error);
+      navigate("/user/register-wallet");
     }
   };
   return (
@@ -79,7 +92,7 @@ const LoginUser = () => {
                 <Field
                   className="form-control"
                   name="password"
-                  type="text"
+                  type="password"
                   validate={validatePassword}
                 />
                 {errors.password && touched.password && (

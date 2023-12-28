@@ -4,6 +4,10 @@ import axiosInstance from "../../../axiosInstance";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getWallet } from "../../services/Routes";
+import {
+  emitErrorToast,
+  emitSuccessToast,
+} from "../components/toastify/toastEmitter";
 
 function RegisterWallet() {
   const navigate = useNavigate();
@@ -39,14 +43,16 @@ function RegisterWallet() {
       const { status } = await axiosInstance.post("/wallet", value);
       if (status === 200) {
         const response = await getWallet();
+        emitSuccessToast(response?.data?.message);
         localStorage.setItem(
           "wallet",
           JSON.stringify(response?.data?.response)
         );
-        navigate("/user");
+        navigate("/user/wallet");
       }
     } catch (error) {
-      console.error("Login Error ", error);
+      const responseData = error?.response?.data?.message;
+      emitErrorToast(responseData);
     }
   };
   return (

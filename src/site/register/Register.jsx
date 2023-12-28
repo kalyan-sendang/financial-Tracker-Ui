@@ -6,6 +6,7 @@ import { Label } from "reactstrap";
 import {
   validateEmail,
   validatePassword,
+  validateProfession,
   validateUsername,
 } from "../../validation/userFormValidation.js";
 import { useNavigate } from "react-router-dom";
@@ -16,13 +17,13 @@ const RegisterUser = () => {
     userName: "",
     email: "",
     password: "",
-    role: "USER",
+    profession: "",
   });
 
   const formikSubmit = async (value, action) => {
     const response = await axiosInstance
-      .post("/user", value)
-      .then(() => navigate("/admin/user"))
+      .post("/auth/user/register", value)
+      .then(() => navigate("/login"))
       .catch((err) => err);
   };
   return (
@@ -62,7 +63,7 @@ const RegisterUser = () => {
                 <Field
                   className="form-control"
                   name="password"
-                  type="text"
+                  type="password"
                   validate={validatePassword}
                 />
                 {errors.password && touched.password && (
@@ -70,14 +71,18 @@ const RegisterUser = () => {
                 )}
               </div>
               <div>
-                <Label>Roles: </Label>
-                <Field className="form-control" as="select" name="role">
-                  <option value="USER">USER</option>
-                  <option value="INTERN">INTERN</option>
-                  <option value="ADMIN">ADMIN</option>
-                </Field>
+                <Label>Profession </Label>
+                <Field
+                  className="form-control"
+                  name="profession"
+                  type="text"
+                  validate={validateProfession}
+                />
+                {errors.profession && touched.profession && (
+                  <div style={{ color: "red" }}>{errors.profession}</div>
+                )}
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary mt-2">
                 Submit
               </button>
             </Form>

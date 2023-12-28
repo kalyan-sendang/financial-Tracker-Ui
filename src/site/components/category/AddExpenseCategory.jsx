@@ -1,5 +1,5 @@
-import RegisterCategory from "../../wallet/RegisterExpenseCategory";
 import { useNavigate } from "react-router-dom";
+import RegisterCategory from "./RegisterExpenseCategory";
 
 function AddExpenseCategory() {
   const navigate = useNavigate();

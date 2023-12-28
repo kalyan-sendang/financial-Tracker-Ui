@@ -5,6 +5,9 @@ import ExpenseList from "./ExpenseList";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { renderMonthOptions } from "./RenderMonthOptions";
+import axios from "axios";
+import axiosInstance from "../../../axiosInstance";
+import { excelGenerator } from "../../services/exportHelper";
 
 function Expense() {
   const navigate = useNavigate();
@@ -37,9 +40,11 @@ function Expense() {
     if (selectedMonth === "all") {
       setAllExpensesEnabled(true);
       refetchAllExpenses();
+      navigate("/user/wallet");
     } else {
       setAllExpensesEnabled(false);
       refetchMonthlyExpenses();
+      navigate("/user/wallet");
     }
     //eslint-disable-next-line
   }, [selectedMonth, setAllExpensesEnabled]);
@@ -64,56 +69,91 @@ function Expense() {
 
   const handleSearch = () => {
     setQueryParams(search);
-
-    refetchAllExpenses();
+    if (selectedMonth === "all") {
+      setAllExpensesEnabled(true);
+      refetchAllExpenses();
+    } else {
+      setAllExpensesEnabled(false);
+      refetchMonthlyExpenses();
+    }
     if (search?.length > 0) {
       setSearch("");
       navigate(`?query=${search}`);
     }
   };
+
+  const handleExport = async () => {
+    const response = await getExpenses("");
+    const data = response?.data?.response;
+    if (response?.data?.success) {
+      const columns = [
+        "expenseId",
+        "expenseCategoryId",
+        "expenseCategoryName",
+        "amount",
+        "date",
+        "note",
+      ];
+      excelGenerator("Transactions", "transactions", columns, data);
+    }
+  };
+
   return (
     <div>
       <div className="row">
         <div className="col">
-          <h3>Expenses</h3>
-        </div>
-        <div style={{ display: "flex", marginTop: "10px" }}>
-          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-            <input
-              className="form-control"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              style={{
-                width: "150px",
-                height: "35px",
-              }}
-            />
+          <h3>
+            Expenses
             <Button
-              style={{
-                marginLeft: "8px",
-                borderRadius: "0.375rem",
-                height: "35px",
-                textAlign: "center",
-              }}
-              className=" mt-auto bg-primary"
+              className="bg-muted ms-5"
               type="button"
-              onClick={handleSearch}
+              onClick={handleExport}
             >
-              <span className="">Search</span>
+              Export
+              <i className="fa-solid fa-download"></i>
             </Button>
-          </div>
+          </h3>
+          <hr></hr>
         </div>
-        <div className="col d-flex justify-content-end">
-          <Button
-            className="mt-auto bg-danger"
-            style={{ border: "none" }}
-            onClick={expenseHandler}
-          >
-            Add expenses
-          </Button>
+        <div>
+          <div style={{ display: "flex", marginTop: "10px" }}>
+            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+              <input
+                className="form-control"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{
+                  width: "150px",
+                  height: "35px",
+                }}
+              />
+              <Button
+                style={{
+                  marginLeft: "8px",
+                  borderRadius: "0.375rem",
+                  height: "35px",
+                  textAlign: "center",
+                }}
+                className=" mt-auto bg-primary"
+                type="button"
+                onClick={handleSearch}
+              >
+                <span className="">Search</span>
+              </Button>
+            </div>
+            <div className="col d-flex justify-content-end">
+              <Button
+                className="mt-auto bg-danger"
+                style={{ border: "none" }}
+                onClick={expenseHandler}
+              >
+                Add expenses
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -7,7 +7,11 @@ import {
   validateNote,
 } from "../../validation/expenseFormvalidation";
 import { useNavigate } from "react-router-dom";
-import RegisterIncomeCategory from "./RegisterIncomeCategory";
+import RegisterIncomeCategory from "../components/category/RegisterIncomeCategory";
+import {
+  emitErrorToast,
+  emitSuccessToast,
+} from "../components/toastify/toastEmitter";
 
 function RegisterIncome() {
   const navigate = useNavigate();
@@ -37,11 +41,14 @@ function RegisterIncome() {
   }, []);
 
   const formikSubmit = async (value, action) => {
-    console.log(walletId);
-    const response = await axiosInstance
-      .post(`/income/${walletId}`, value)
-      .then(() => navigate("/user/wallet"))
-      .catch((err) => err);
+    try {
+      const response = await axiosInstance.post(`/income/${walletId}`, value);
+      emitSuccessToast(response?.data?.message);
+      navigate("/user/wallet");
+    } catch (error) {
+      const responseData = error?.response?.data?.message;
+      emitErrorToast(responseData);
+    }
   };
 
   const categoryHandler = () => {

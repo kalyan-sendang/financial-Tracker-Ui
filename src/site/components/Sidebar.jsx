@@ -65,7 +65,7 @@ const Sidebar = () => {
               setActive={setActive}
             />
             <NavLink
-              link="/user/registerwallet"
+              link="/user/register-wallet"
               title="Register Wallet"
               active={active}
               setActive={setActive}

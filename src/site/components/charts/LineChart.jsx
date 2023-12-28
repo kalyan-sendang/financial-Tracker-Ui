@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { lineHelperFunc } from "../../services/LineHelper";
+import { lineHelperFunc } from "../../../services/LineHelper";
 
 function LineChart({ expenseData, incomeData }) {
   const [linedata, setLineData] = useState("");
@@ -11,13 +11,14 @@ function LineChart({ expenseData, incomeData }) {
 
   useEffect(() => {
     if (incomeData && expenseData) fetchExpenseAndIncomeData();
+    //eslint-disable-next-line
   }, [incomeData, expenseData]);
 
   const lineChart = () => {
     const lineChart = window.google.visualization.arrayToDataTable(linedata);
 
     var options = {
-      title: "Income vs Expense",
+      title: "Income vs Expense (2023)",
       vAxis: {
         title: "Amount",
       },
@@ -37,6 +38,7 @@ function LineChart({ expenseData, incomeData }) {
     if (linedata) {
       window.google.charts.setOnLoadCallback(lineChart);
     }
+    //eslint-disable-next-line
   }, [linedata]);
 
   return <div id="line-chart"></div>;

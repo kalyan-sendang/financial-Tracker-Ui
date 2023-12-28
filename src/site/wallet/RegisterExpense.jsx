@@ -7,8 +7,11 @@ import {
   validateNote,
 } from "../../validation/expenseFormvalidation";
 import { useNavigate } from "react-router-dom";
-import RegisterCategory from "./RegisterExpenseCategory";
-import { emitErrorToast } from "../components/toastify/toastEmitter";
+import {
+  emitErrorToast,
+  emitSuccessToast,
+} from "../components/toastify/toastEmitter";
+import RegisterCategory from "../components/category/RegisterExpenseCategory";
 
 function RegisterExpense() {
   const navigate = useNavigate();
@@ -40,7 +43,8 @@ function RegisterExpense() {
 
   const formikSubmit = async (value, action) => {
     try {
-      await axiosInstance.post(`/expense/${walletId}`, value);
+      const response = await axiosInstance.post(`/expense/${walletId}`, value);
+      emitSuccessToast(response?.data?.message);
       navigate("/user/wallet");
     } catch (error) {
       const responseData = error?.response?.data?.message;

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import ExpenseHistogram from "../components/ExpenseHistogram";
-import IncomeHistogram from "../components/IncomeHistogram";
+
 import { Card, Col, Container, Row } from "reactstrap";
-import ExpensePieChart from "../components/ExpensePieChart";
-import IncomePieChart from "../components/IncomePieChart";
-import LineChart from "../components/LineChart";
-import axiosInstance from "../../../axiosInstance";
+
+import axiosInstance from "../../axiosInstance";
+import ExpensePieChart from "./components/charts/ExpensePieChart";
+import IncomePieChart from "./components/charts/IncomePieChart";
+import LineChart from "./components/charts/LineChart";
+import ExpenseHistogram from "./components/charts/ExpenseHistogram";
+import IncomeHistogram from "./components/charts/IncomeHistogram";
 
 function UserDashboard() {
   const [chartsLoaded, setChartsLoaded] = useState(false);
@@ -56,13 +58,12 @@ function UserDashboard() {
               </Col>
             </Row>
           </Container>
-
-          <hr className="bg-info border-3 border-top border-secondary" />
-          <LineChart incomeData={incomeData} expenseData={expenseData} />
           <hr className="bg-info border-3 border-top border-secondary" />
           <ExpenseHistogram expenseData={expenseData} />
           <hr className="bg-info border-3 border-top border-secondary" />
           <IncomeHistogram incomeData={incomeData} />
+          <hr className="bg-info border-3 border-top border-secondary" />
+          <LineChart incomeData={incomeData} expenseData={expenseData} />
         </>
       )}
     </div>

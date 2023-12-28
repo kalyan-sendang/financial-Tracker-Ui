@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { pieIncomeHelperFunc } from "../../services/incomeHelper";
+import { pieIncomeHelperFunc } from "../../../services/incomeHelper";
 
 function IncomePieChart({ incomeData: data }) {
   const [incomeData, setIncomeData] = useState("");
@@ -20,7 +20,7 @@ function IncomePieChart({ incomeData: data }) {
       window.google.visualization.arrayToDataTable(incomeData);
 
     var options = {
-      title: "Income per year per category",
+      title: "Income per year per category (2023)",
       is3D: true,
     };
 
