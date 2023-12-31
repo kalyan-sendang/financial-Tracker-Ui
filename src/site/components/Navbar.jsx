@@ -1,8 +1,6 @@
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "reactstrap";
-import Notification from "../notification/Notification";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -22,11 +20,11 @@ function Navbar() {
     <div>
       {/* {notificationEnabled && <Notification />} */}
       <nav className="navbar navbar-expand">
-        <div className="navbar-collapse" id="navbarSupportedContent">
-          <div
-            className="container justify-content-end"
-            style={{ display: "flex" }}
-          >
+        <div
+          className="navbar-collapse d-flex justify-content-end "
+          id="navbarSupportedContent"
+        >
+          <div className="d-flex ">
             <ul className="navbar-nav mr-auto d-flex align-items-center ">
               <li className="nav-item active" style={{ paddingRight: "1rem" }}>
                 <Button

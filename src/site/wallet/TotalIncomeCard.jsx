@@ -13,18 +13,14 @@ function TotalIncomeCard() {
     return <div>Loading...</div>;
   }
   return (
-    <div>
-      <Card
-        style={{ width: "18rem", backgroundColor: "#caebd0", border: "none" }}
-      >
-        <Card.Body>
-          <Card.Title>Total Incomes</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
-            Rs.{data?.data?.response}
-          </Card.Subtitle>
-        </Card.Body>
-      </Card>
-    </div>
+    <Card style={{ width: "60%", backgroundColor: "#caebd0", border: "none" }}>
+      <Card.Body>
+        <Card.Title>Total Incomes</Card.Title>
+        <Card.Subtitle className="mb-2 text-muted">
+          Rs.{data?.data?.response}
+        </Card.Subtitle>
+      </Card.Body>
+    </Card>
   );
 }
 export default TotalIncomeCard;

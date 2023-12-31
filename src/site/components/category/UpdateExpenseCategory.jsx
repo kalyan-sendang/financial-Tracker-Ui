@@ -33,8 +33,8 @@ function UpdateExpenseCategory() {
     let error;
     if (!value) {
       error = "Amount is Required";
-    } else if (value < 0) {
-      error = "Amount cannot be negetive";
+    } else if (value <= 0) {
+      error = "Amount cannot be negetive or zero";
     } else if (!Number.isInteger(value)) {
       error = "Enter in number format";
     }
@@ -47,7 +47,7 @@ function UpdateExpenseCategory() {
 
   const formikSubmit = async (value, action) => {
     try {
-      await axiosInstance.put(`/expenseCategory/${id}`, value);
+      await axiosInstance.put(`/expense-category/${id}`, value);
       navigate("/user/category");
     } catch (error) {
       console.log("Error creating new Category", error);

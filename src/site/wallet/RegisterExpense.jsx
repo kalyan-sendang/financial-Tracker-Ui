@@ -29,7 +29,7 @@ function RegisterExpense() {
 
   const fetchExpenseCategories = async () => {
     try {
-      const response = await axiosInstance.get("/expenseCategory");
+      const response = await axiosInstance.get("/expense-category");
       const data = response?.data;
       const categories = data?.response;
       setCategories(categories);
@@ -108,7 +108,7 @@ function RegisterExpense() {
                     {categories.map((category, idx) => (
                       <option value={category?.expenseCategoryId} key={idx}>
                         <span>{category.name}</span>
-                        <span> MaxLimit: Rs. {category.maxLimit}</span>
+                        {/* <span> MaxLimit: Rs. {category.maxLimit}</span> */}
                       </option>
                     ))}
                   </Field>

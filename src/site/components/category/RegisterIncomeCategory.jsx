@@ -19,7 +19,7 @@ function RegisterIncomeCategory({ clickHandler }) {
 
   const formikSubmit = async (value, action) => {
     try {
-      const response = await axiosInstance.post(`/incomeCategory`, value);
+      const response = await axiosInstance.post(`/income-category`, value);
       console.log(response?.data?.message);
       emitSuccessToast(response?.data?.message);
       clickHandler();

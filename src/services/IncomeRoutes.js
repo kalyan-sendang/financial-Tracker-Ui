@@ -12,9 +12,9 @@ export const addIncome = async () => {
 };
 
 export const getTotalIncome = async () => {
-  return axiosInstance.get("/income/totalIncome");
+  return axiosInstance.get("/income/total-income");
 };
 
 export const getIncomeCategory = async () => {
-  return axiosInstance.get("/incomeCategory");
+  return axiosInstance.get("/income-category");
 };

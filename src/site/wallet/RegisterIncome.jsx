@@ -28,8 +28,9 @@ function RegisterIncome() {
 
   const fetchIncomeCategories = async () => {
     try {
-      const response = await axiosInstance.get("/incomeCategory");
+      const response = await axiosInstance.get("/income-category");
       const data = response?.data;
+      console.log(data);
       const categories = data?.response;
       setCategories(categories);
     } catch (error) {

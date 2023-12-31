@@ -13,7 +13,7 @@ export const addExpense = async () => {
 };
 
 export const getTotalExpense = async () => {
-  return await axiosInstance.get("/expense/totalExpense");
+  return await axiosInstance.get("/expense/total-expense");
 };
 
 export const expensePerCategory = async () => {
@@ -21,5 +21,5 @@ export const expensePerCategory = async () => {
 };
 
 export const getExpenseCategory = async () => {
-  return await axiosInstance.get("/expenseCategory");
+  return await axiosInstance.get("/expense-category");
 };

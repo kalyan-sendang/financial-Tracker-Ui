@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import { useState } from "react";
-import { Button, Label } from "reactstrap";
+import { Label } from "reactstrap";
 import axiosInstance from "../../../../axiosInstance";
 import "../../../styles/styles.css";
 import { emitErrorToast, emitSuccessToast } from "../toastify/toastEmitter";
@@ -23,8 +23,8 @@ function RegisterCategory({ clickHandler }) {
     let error;
     if (!value) {
       error = "Amount is Required";
-    } else if (value < 0) {
-      error = "Amount cannot be negetive";
+    } else if (value <= 0) {
+      error = "Amount cannot be negetive or zero";
     } else if (!Number.isInteger(value)) {
       error = "Enter in number format";
     }
@@ -33,7 +33,7 @@ function RegisterCategory({ clickHandler }) {
 
   const formikSubmit = async (value, action) => {
     try {
-      const response = await axiosInstance.post(`/expenseCategory`, value);
+      const response = await axiosInstance.post(`/expense-category`, value);
       emitSuccessToast(response?.data?.message);
       clickHandler();
     } catch (error) {

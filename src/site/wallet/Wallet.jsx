@@ -16,16 +16,15 @@ function Wallet() {
     return <div>Loading...</div>;
   }
   return (
-    <div className="container">
+    <div>
+      <h2>
+        <b>{wallet?.name}</b>
+      </h2>
       <Row>
-        <div className="col-3">
-          <h2>
-            <b>{wallet?.name}</b>
-          </h2>
-
+        <div className="col-2">
           <Card
             style={{
-              width: "18rem",
+              width: "60%",
               backgroundColor: "#b8e1f2",
               border: "none",
             }}
@@ -38,10 +37,10 @@ function Wallet() {
             </Card.Body>
           </Card>
         </div>
-        <div className="col-3" style={{ paddingTop: "45px" }}>
+        <div className="col-2">
           <TotalExpenseCard />
         </div>
-        <div className="col-3" style={{ paddingTop: "45px" }}>
+        <div className="col-2">
           <TotalIncomeCard />
         </div>
       </Row>

@@ -53,6 +53,12 @@ const Sidebar = () => {
               active={active}
               setActive={setActive}
             />
+            <NavLink
+              link="/user/saving"
+              title="Saving"
+              active={active}
+              setActive={setActive}
+            />
           </ul>
         </div>
       ) : (
@@ -79,6 +85,12 @@ const Sidebar = () => {
             <NavLink
               link="/user/category"
               title="Category"
+              active={active}
+              setActive={setActive}
+            />
+            <NavLink
+              link="/user/saving"
+              title="Saving"
               active={active}
               setActive={setActive}
             />

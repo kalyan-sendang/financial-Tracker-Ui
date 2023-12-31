@@ -1,4 +1,3 @@
-import React from "react";
 import { Col, Row } from "reactstrap";
 import IncomeCategory from "./IncomeCategory";
 import ExpenseCategory from "./ExpenseCategory";

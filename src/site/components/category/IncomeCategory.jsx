@@ -23,7 +23,7 @@ function IncomeCategory() {
   // };
 
   const onDelete = async (id) => {
-    const response = await axiosInstance.put(`/incomeCategory/${id}`);
+    const response = await axiosInstance.put(`/income-category/${id}`);
     refetch();
   };
 
@@ -38,7 +38,7 @@ function IncomeCategory() {
         </div>
         <div className="col d-flex justify-content-end">
           <Button
-            className="mt-auto bg-primary"
+            className="mt-auto bg-success"
             style={{ border: "none" }}
             onClick={incomeHandler}
           >

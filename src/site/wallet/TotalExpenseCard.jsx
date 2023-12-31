@@ -13,18 +13,14 @@ function TotalExpenseCard() {
     return <div>Loading...</div>;
   }
   return (
-    <div>
-      <Card
-        style={{ width: "18rem", backgroundColor: "#faaaa7", border: "none" }}
-      >
-        <Card.Body>
-          <Card.Title>Total Expenses</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
-            Rs.{data?.data?.response}
-          </Card.Subtitle>
-        </Card.Body>
-      </Card>
-    </div>
+    <Card style={{ width: "60%", backgroundColor: "#faaaa7", border: "none" }}>
+      <Card.Body>
+        <Card.Title>Total Expenses</Card.Title>
+        <Card.Subtitle className="mb-2 text-muted">
+          Rs.{data?.data?.response}
+        </Card.Subtitle>
+      </Card.Body>
+    </Card>
   );
 }
 export default TotalExpenseCard;

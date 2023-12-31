@@ -17,6 +17,9 @@ import AddIncomeCategory from "./site/components/category/AddIncomeCategory";
 import UserDashboard from "./site/UserDashboard";
 import ProfilePage from "./site/login/ProfilePage";
 import { useState } from "react";
+import Saving from "./site/components/saving/Saving";
+import RegisterSaving from "./site/components/saving/RegisterSaving";
+import AddAmount from "./site/components/saving/AddAmount";
 
 const AppRoutes = () => {
   const [user, setUser] = useState(
@@ -69,6 +72,11 @@ const AppRoutes = () => {
             />
             <Route path="expenseCategory" element={<AddExpenseCategory />} />
             <Route path="incomeCategory" element={<AddIncomeCategory />} />
+          </Route>
+          <Route path="saving">
+            <Route index element={<Saving />} />
+            <Route path="registerSaving" element={<RegisterSaving />} />
+            <Route path="addAmount/:id" element={<AddAmount />} />
           </Route>
         </Route>
       </Routes>

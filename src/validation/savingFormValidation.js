@@ -1,21 +1,21 @@
-function validateNote(value) {
+function validateName(value) {
   let error;
   if (!value) {
-    error = "Note cannot be empty";
+    error = "Category name is Required";
   }
   return error;
 }
 
-function ValidateAmount(value) {
+function validateAmount(value) {
   let error;
   if (!value) {
     error = "Amount is Required";
   } else if (value <= 0) {
-    error = "Price cannot be negetive or zero";
+    error = "Amount cannot be negetive or zero";
   } else if (!Number.isInteger(value)) {
     error = "Enter in number format";
   }
   return error;
 }
 
-export { validateNote, ValidateAmount };
+export { validateName, validateAmount };

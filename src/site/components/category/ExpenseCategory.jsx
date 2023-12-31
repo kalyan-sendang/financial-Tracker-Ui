@@ -28,12 +28,11 @@ function ExpenseCategory() {
   //   navigate("/user/wallet/registerIncome");
   // };
   const onDelete = async (id) => {
-    const response = await axiosInstance.delete(`/expenseCategory/${id}`);
+    const response = await axiosInstance.delete(`/expense-category/${id}`);
     refetch();
   };
 
   const onUpdate = async (id) => {
-    console.log(id);
     navigate(`/user/category/updateExpenseCategory/${id}`);
   };
 
@@ -49,7 +48,7 @@ function ExpenseCategory() {
         </div>
         <div className="col d-flex justify-content-end">
           <Button
-            className="mt-auto bg-primary"
+            className="mt-auto bg-success"
             style={{ border: "none" }}
             onClick={expenseHandler}
           >
